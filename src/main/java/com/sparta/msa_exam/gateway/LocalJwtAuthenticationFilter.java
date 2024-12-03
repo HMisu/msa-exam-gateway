@@ -1,7 +1,6 @@
 package com.sparta.msa_exam.gateway;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -61,15 +60,9 @@ public class LocalJwtAuthenticationFilter implements GlobalFilter {
                     .header("X-User-Id", claims.get("user_id").toString())
                     .header("X-Role", claims.get("role").toString())
                     .build();
-
             return true;
-        } catch (ExpiredJwtException e) {
-            log.error("JWT token expired", e);
         } catch (Exception e) {
-            log.error("JWT token validation failed", e);
+            return false;
         }
-
-        return false;
     }
-
 }
