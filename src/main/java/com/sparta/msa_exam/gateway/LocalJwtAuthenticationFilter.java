@@ -60,11 +60,9 @@ public class LocalJwtAuthenticationFilter implements GlobalFilter {
                     .header("X-User-Id", claims.get("user_id").toString())
                     .header("X-Role", claims.get("role").toString())
                     .build();
-
             return true;
         } catch (Exception e) {
             return false;
         }
     }
-
 }
